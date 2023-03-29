@@ -2,7 +2,7 @@ const http = require('http');
 const sharp = require('sharp');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 http.createServer((req, res) => {
   if (req.url === '/') {
