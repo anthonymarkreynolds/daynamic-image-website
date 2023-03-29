@@ -21,18 +21,16 @@ http.createServer((req, res) => {
       res.end('Invalid width parameter');
       return;
     }
-    // Get the current date and time as a formatted string
 
-    // console.log("about to try async...")
     (async () => {
-      // console.log("inside async")
       const now = new Date();
+      // Get the current date and time as a formatted string
       const timestamp = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       + ' ' + now.toLocaleTimeString('en-US', { hour12: false });
       const leftMargin = 16
 
       const loremPicsumID = Math.ceil(Math.random() * 500)
-    // Get a random lorem picsum image
+      // Get a random lorem picsum image
       const loremPicsumUrl = `https://picsum.photos/id/${loremPicsumID}/${Math.min (Math.max(screenWidth, 300), 300) }/200?grayscale`
 
       try {
@@ -75,9 +73,7 @@ http.createServer((req, res) => {
   based on user requests.
 </text>
 </svg>`;
-    // console.log("awaiting loremPicsum res...")
     const loremPicsumRes = await fetch(loremPicsumUrl)
-    console.log(loremPicsumRes)
     const loremPicsumBuf = Buffer.from(await loremPicsumRes.arrayBuffer());
     await sharp({
       create: {
@@ -105,11 +101,6 @@ http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'image/jpeg' });
         res.end(data);
       })
-      // .catch((err) => {
-      //   console.error(err);
-      //   res.writeHead(500, { 'Content-Type': 'text/plain' });
-      //   res.end('Internal Server Error');
-      // });
       } catch (err) {
         console.error(err);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
