@@ -15,7 +15,7 @@ In addition to creating dynamic images, I'm also using fetch to randomly downloa
 All of this is done in real-time based on user requests
 
 ## Performance
-Because the images are generated dynamically using the Sharp image processing library, response times may be slower than for a typical static website. Depending on the size of the image and the server load, it may take several seconds for the image to be generated and displayed in the browser.
+Because the images are generated dynamically using the Sharp image processing library, response times may be slower than for a typical website. Depending on the size of the image and the server load, it may take several seconds for the image to be generated and displayed in the browser.
 
 It's recommended that users be patient and avoid refreshing the page while the image is being generated. If you experience long wait times or other issues with the app, please let me know and I will do my best to address them.
 
