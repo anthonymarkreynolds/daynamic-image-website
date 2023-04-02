@@ -10,7 +10,7 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end('<!DOCTYPE html> <html> <head> <title>My Site</title> <meta name="viewport" content="width=device-width, initial-scale=1"> </head> <body> <button onclick="enterSite()">Enter Site</button> <script> function enterSite() { const screenWidth = window.innerWidth; const screenHeight = window.innerHeight; const url = `/enter?width=${screenWidth}&height=${screenHeight}`; window.location.href = url; } </script> </body> </html> ');
   } else if (req.url.startsWith('/enter')) {
-    // If the request is for the /image path, get the user's screen width from the query parameters
+    // If the request is for the /enter path, get the user's screen width from the query parameters
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const screenWidth = parseInt(urlParams.get('width'));
     const screenHeight = parseInt(urlParams.get('height'));
@@ -27,10 +27,11 @@ http.createServer((req, res) => {
       // Get the current date and time as a formatted string
       const timestamp = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       + ' ' + now.toLocaleTimeString('en-US', { hour12: false });
+
       const leftMargin = 16
 
-      const loremPicsumID = Math.ceil(Math.random() * 500)
       // Get a random lorem picsum image
+      const loremPicsumID = Math.ceil(Math.random() * 500)
       const loremPicsumUrl = `https://picsum.photos/id/${loremPicsumID}/${Math.min (Math.max(screenWidth, 300), 300) }/200?grayscale`
 
       try {
