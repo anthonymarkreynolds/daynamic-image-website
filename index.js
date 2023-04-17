@@ -1,19 +1,24 @@
 const http = require('http');
 const sharp = require('sharp');
 const path = require('path');
+const fs = require('fs')
 
 const PORT = process.env.PORT || 3000;
 
 http.createServer((req, res) => {
   if (req.url === '/') {
     // If the request is for the root path, send an HTML response with an "Enter Site" button
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end('<!DOCTYPE html> <html> <head> <title>My Site</title> <meta name="viewport" content="width=device-width, initial-scale=1"> </head> <body> <button onclick="enterSite()">Enter Site</button> <script> function enterSite() { const screenWidth = window.innerWidth; const screenHeight = window.innerHeight; const url = `/enter?width=${screenWidth}&height=${screenHeight}`; window.location.href = url; } </script> </body> </html> ');
+    fs.readFile('index.html', (err, data) => {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(data)
+    })
   } else if (req.url.startsWith('/enter')) {
     // If the request is for the /enter path, get the user's screen width from the query parameters
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const screenWidth = parseInt(urlParams.get('width'));
     const screenHeight = parseInt(urlParams.get('height'));
+
+    const heading = urlParams.get('heading')
 
     if (!Number.isInteger(screenWidth) || screenWidth <= 0) {
       // If the width is invalid, send a 400 Bad Request response
@@ -45,7 +50,7 @@ http.createServer((req, res) => {
   </defs>
   <rect width="100%" height="100%" fill="url(#bg-gradient)" fill-opacity="0.5"/>
 <text x="${leftMargin}px" y="100px" font-family="Arial" font-size="48" fill="white">
-  Page Heading
+  ${heading}
 </text>
 <g transform="translate(50%, 20%)">
 <text x="${leftMargin}px" y="240px" font-family="Arial" font-size="24" fill="white">Image Details</text>
