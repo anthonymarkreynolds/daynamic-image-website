@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body> 
+	<input type="text" name="heading" id="heading" placeholder="Heading">
+
+    <button onclick="enterSite()">Enter Site</button>
+
+    <script defer> 
+		
+		function enterSite() { 
+			const heading = document.querySelector('#heading').value
+			
+            const screenWidth = window.innerWidth; const screenHeight = window.innerHeight; 
+
+            const url = `/enter?width=${screenWidth}&height=${screenHeight}&heading=${heading}`; 
+
+            window.location.href = url; 
+        } 
+    </script>
+
+
+</body>
+
+</html>
